@@ -1,0 +1,19 @@
+{
+    "name": "liujinyong\/tencent-v3-api",
+    "description": "base on tencent-api V3 version",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "liujinyong",
+            "email": "893296814@qq.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Liujinyong\\TencentV3Api\\": "src"
+        }
+    }
+}
