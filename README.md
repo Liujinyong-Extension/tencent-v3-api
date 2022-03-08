@@ -11,12 +11,16 @@ $ composer require liujinyong/tencent-v3-api -vvv
 
 ## 配置
 ``
-在使用本扩展之前，请先注册腾讯云账号，获取secretId和secretKey,及创建相应的人员库，
+在使用本扩展之前，请先注册腾讯云账号，获取secretId和secretKey,及创建相应的人员库.
 ``
 
 ## Usage
 
-TODO
+1.在config文件里添加secretId和secretKey配置项
+
+
+
+
 
 ## Contributing
 

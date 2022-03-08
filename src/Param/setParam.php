@@ -10,6 +10,8 @@
     namespace Liujinyong\TencentV3Api\Param;
 
 
+    use Liujinyong\TencentV3Api\Exception\InvalidSettingParam;
+
     class setParam
     {
         protected $secretId  = "";
@@ -24,14 +26,20 @@
         public function __construct()
         {
 
-            $this->secretId  = "XXXXXXXXXXX";
-            $this->secretKey = "XXXXXXXXXXX";
+            $this->secretId  = config("secretId");
+            $this->secretKey = config("secretKey");
             $this->timeStamp = time();
 
         }
 
         public function Authorization($payload)
         {
+
+            if (empty($this->secretKey) || empty($this->secretId)){
+                throw new InvalidSettingParam("未获取到secretId和secretKey");
+            }
+
+
             $algorithm = "TC3-HMAC-SHA256";
 
             $httpRequestMethod    = "POST";
