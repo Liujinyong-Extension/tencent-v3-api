@@ -28,6 +28,7 @@
 
             $this->secretId  = config("secretId");
             $this->secretKey = config("secretKey");
+
             $this->timeStamp = time();
 
         }
