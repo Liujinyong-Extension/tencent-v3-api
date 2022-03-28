@@ -13,7 +13,7 @@
     use Liujinyong\TencentV3Api\Exception\HttpException;
     use think\Exception;
 
-    class nYoFace extends Common
+    class Face extends Common
     {
         protected $host = "https://iai.tencentcloudapi.com";
 
