@@ -11,18 +11,28 @@
 
 
     use Liujinyong\TencentV3Api\Exception\HttpException;
+    use Liujinyong\TencentV3Api\Exception\InvalidSettingParam;
     use think\Exception;
 
     class Face extends Common
     {
+
         protected $host = "https://iai.tencentcloudapi.com";
+
+        public function __construct($secretId = "", $secretKey = "")
+        {
+            if ($secretId == "" || $secretKey == "" ) {
+                throw new InvalidSettingParam("配置参数为空");
+            }
+            parent::__construct($secretId, $secretKey);
+        }
 
         /**
          * @param string $userId   用户ID
          * @param string $imageUrl 用户人脸照片
          *
          * @return mixed
-         *
+         *  【验证用户人脸】
          * author Brahma
          * @throws \GuzzleHttp\Exception\GuzzleException
          * @throws \Liujinyong\TencentV3Api\Exception\HttpException

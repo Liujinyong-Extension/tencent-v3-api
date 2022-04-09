@@ -12,11 +12,21 @@
 
     use Liujinyong\TencentV3Api\Exception\HttpException;
     use Liujinyong\TencentV3Api\Exception\InvalidArgumentException;
+    use Liujinyong\TencentV3Api\Exception\InvalidSettingParam;
     use think\Exception;
 
     class People extends Common
     {
         protected $host = "https://iai.tencentcloudapi.com";
+
+
+        public function __construct($secretId = "", $secretKey = "")
+        {
+            if ($secretId == "" || $secretKey == "") {
+                throw new InvalidSettingParam("配置参数为空");
+            }
+            parent::__construct($secretId, $secretKey);
+        }
 
 
         /**
@@ -26,7 +36,7 @@
          * @param string $groupId  人员库ID
          *
          * @return mixed
-         *
+         * 【创建人员】
          * author Brahma
          * @throws \GuzzleHttp\Exception\GuzzleException
          * @throws \Liujinyong\TencentV3Api\Exception\HttpException
@@ -58,11 +68,11 @@
         }
 
         /**
-         * @param string $userId 用户ID
+         * @param string $userId  用户ID
          * @param string $groupId 人员库ID
          *
          * @return mixed
-         *
+         * 【删除人员】
          * author Brahma
          * @throws \GuzzleHttp\Exception\GuzzleException
          * @throws \Liujinyong\TencentV3Api\Exception\HttpException

@@ -23,11 +23,21 @@
         const REGION  = "ap-beijing";
         const SERVICE = "iai";
 
-        public function __construct()
+        /**
+         * setParam constructor.
+         *
+         * @param string $secretId
+         * @param string $secretKey
+         *
+         * @throws \Liujinyong\TencentV3Api\Exception\InvalidSettingParam
+         */
+        public function __construct($secretId = "", $secretKey = "")
         {
-
-            $this->secretId  = config("secretId");
-            $this->secretKey = config("secretKey");
+            if ($secretId == "" || $secretKey == "") {
+                throw new InvalidSettingParam("密钥ID或者密钥Key为空");
+            }
+            $this->secretId  = $secretId;
+            $this->secretKey = $secretKey;
 
             $this->timeStamp = time();
 
@@ -36,7 +46,7 @@
         public function Authorization($payload)
         {
 
-            if (empty($this->secretKey) || empty($this->secretId)){
+            if (empty($this->secretKey) || empty($this->secretId)) {
                 throw new InvalidSettingParam("未获取到secretId和secretKey");
             }
 

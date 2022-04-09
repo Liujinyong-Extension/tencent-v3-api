@@ -19,9 +19,16 @@
         protected $paramClass = null;
         protected $httpClient = null;
 
-        public function __construct()
+        public function __construct($secretId = "", $secretKey = "")
         {
-            $this->paramClass = new setParam();
-            $this->httpClient = new Client();
+            if ($this->paramClass == null) {
+
+                $this->paramClass = new setParam($secretId, $secretKey);
+            }
+            if ($this->httpClient == null) {
+
+                $this->httpClient = new Client();
+            }
         }
+
     }
