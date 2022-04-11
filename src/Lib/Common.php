@@ -19,11 +19,11 @@
         protected $paramClass = null;
         protected $httpClient = null;
 
-        public function __construct($secretId = "", $secretKey = "")
+        public function __construct($secretId = "", $secretKey = "",$option = [])
         {
             if ($this->paramClass == null) {
 
-                $this->paramClass = new setParam($secretId, $secretKey);
+                $this->paramClass = new setParam($secretId, $secretKey,$option);
             }
             if ($this->httpClient == null) {
 

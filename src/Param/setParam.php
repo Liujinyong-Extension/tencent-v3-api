@@ -18,10 +18,10 @@
         protected $secretKey = "";
         protected $timeStamp = null;
 
-        const HOST    = "iai.tencentcloudapi.com";
-        const VERSION = "2020-03-03";
-        const REGION  = "ap-beijing";
-        const SERVICE = "iai";
+        protected $host = "";
+        protected $version = "";
+        protected $region = "";
+        protected $service = "";
 
         /**
          * setParam constructor.
@@ -31,15 +31,21 @@
          *
          * @throws \Liujinyong\TencentV3Api\Exception\InvalidSettingParam
          */
-        public function __construct($secretId = "", $secretKey = "")
+        public function __construct($secretId = "", $secretKey = "",$option)
         {
             if ($secretId == "" || $secretKey == "") {
                 throw new InvalidSettingParam("密钥ID或者密钥Key为空");
             }
             $this->secretId  = $secretId;
             $this->secretKey = $secretKey;
-
             $this->timeStamp = time();
+            if (!isset($option['host']) || !isset($option['version']) || !isset($option['region']) || !isset($option['service'])){
+                throw new InvalidSettingParam("配置不对");
+            }
+            $this->host = $option['host'];
+            $this->version = $option['version'];
+            $this->region = $option['region'];
+            $this->service = $option['service'];
 
         }
 
@@ -56,18 +62,18 @@
             $httpRequestMethod    = "POST";
             $canonicalUri         = "/";
             $canonicalQueryString = "";
-            $canonicalHeaders     = "content-type:application/json; charset=utf-8\n" . "host:" . self::HOST . "\n";
+            $canonicalHeaders     = "content-type:application/json; charset=utf-8\n" . "host:" . $this->host . "\n";
             $signedHeaders        = "content-type;host";
 
             $hashedRequestPayload   = hash("SHA256", $payload);
             $canonicalRequest       = $httpRequestMethod . "\n" . $canonicalUri . "\n" . $canonicalQueryString . "\n" . $canonicalHeaders . "\n" . $signedHeaders . "\n" . $hashedRequestPayload;
             $date                   = gmdate("Y-m-d", $this->timeStamp);
-            $credentialScope        = $date . "/" . self::SERVICE . "/tc3_request";
+            $credentialScope        = $date . "/" . $this->service . "/tc3_request";
             $hashedCanonicalRequest = hash("SHA256", $canonicalRequest);
             $stringToSign           = $algorithm . "\n" . $this->timeStamp . "\n" . $credentialScope . "\n" . $hashedCanonicalRequest;
 
             $secretDate    = hash_hmac("SHA256", $date, "TC3" . $this->secretKey, true);
-            $secretService = hash_hmac("SHA256", self::SERVICE, $secretDate, true);
+            $secretService = hash_hmac("SHA256", $this->service, $secretDate, true);
             $secretSigning = hash_hmac("SHA256", "tc3_request", $secretService, true);
             $signature     = hash_hmac("SHA256", $stringToSign, $secretSigning);
             $authorization = $algorithm . " Credential=" . $this->secretId . "/" . $credentialScope . ", SignedHeaders=content-type;host, Signature=" . $signature;
@@ -80,11 +86,11 @@
             return [
                 'Authorization'  => $this->Authorization($payload),
                 'Content-Type'   => 'application/json; charset=utf-8',
-                'Host'           => self::HOST,
+                'Host'           => $this->host,
                 'X-TC-Action'    => $action,
                 'X-TC-Timestamp' => $this->timeStamp,
-                'X-TC-Version'   => self::VERSION,
-                'X-TC-Region'    => self::REGION
+                'X-TC-Version'   => $this->version,
+                'X-TC-Region'    => $this->region
             ];
         }
     }

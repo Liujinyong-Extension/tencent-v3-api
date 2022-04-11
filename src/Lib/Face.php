@@ -24,7 +24,13 @@
             if ($secretId == "" || $secretKey == "" ) {
                 throw new InvalidSettingParam("配置参数为空");
             }
-            parent::__construct($secretId, $secretKey);
+            $option = [
+                'host'=>'iai.tencentcloudapi.com',
+                'version'=>'2020-03-03',
+                'region'=>'ap-beijing',
+                'service'=>'iai',
+            ];
+            parent::__construct($secretId, $secretKey,$option);
         }
 
         /**
