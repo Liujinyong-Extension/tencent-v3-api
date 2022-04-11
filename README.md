@@ -6,7 +6,7 @@
 ## 安装
 
 ```shell
-$ composer require liujinyong/tencent-v3-api -vvv
+$ composer require liujinyong/tencent-v3-api 
 ```
 
 ## 配置
