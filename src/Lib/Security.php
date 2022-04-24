@@ -32,7 +32,7 @@
 
         /**
          * @param $steamName
-         * @param $pushUrl
+         * @param $pullUrl
          * @param $bizType
          * @param $callBackUrl
          * 创建视频审核任务
@@ -40,7 +40,7 @@
          * author Fox
          * @throws \Liujinyong\TencentV3Api\Exception\HttpException
          */
-        public function createVideoSecurityTask($steamName, $pushUrl,$bizType,$callBackUrl ="")
+        public function createVideoSecurityTask($steamName, $pullUrl,$bizType,$callBackUrl ="")
         {
             $payload = [
                 "Type"    => "LIVE_VIDEO",
@@ -49,7 +49,7 @@
                        "DataId" => $steamName,
                        "Input"  => [
                            "Type" => "URL",
-                           "Url"  => $pushUrl
+                           "Url"  => $pullUrl
                        ]
                    ]
                 ],
@@ -70,7 +70,7 @@
          * author Fox
          * @throws \Liujinyong\TencentV3Api\Exception\HttpException
          */
-        public function CancelTask($taskId)
+        public function cancelTask($taskId)
         {
             $payload = [
                 "TaskId"    => $taskId,
