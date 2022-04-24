@@ -11,6 +11,7 @@
 
 
     use GuzzleHttp\Client;
+    use Liujinyong\TencentV3Api\Exception\HttpException;
     use Liujinyong\TencentV3Api\Param\setParam;
 
     class Common
@@ -29,6 +30,20 @@
 
                 $this->httpClient = new Client();
             }
+        }
+
+        public function tryCurl($action,$payload = [])
+        {
+            try {
+                $res = $this->httpClient->post($this->host, [
+                    'json'    => $payload,
+                    'headers' => $this->paramClass->header($action, json_encode($payload))
+                ]);
+            } catch (Exception $e) {
+                throw new HttpException($e->getMessage(), $e->getCode(), $e);
+            }
+
+            return json_decode($res->getBody()->getContents(), 1);
         }
 
     }

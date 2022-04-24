@@ -74,18 +74,8 @@
                 'AppName'    => $appName,
                 'EndTime'    => $endTime
             ];
-            $header  = $this->paramClass->header("CreateRecordTask", json_encode($payload));
 
-            try {
-
-                $res = $this->httpClient->post($this->host, ['headers' => $header, 'json' => $payload]);
-
-            } catch (\Exception $e) {
-
-                throw new HttpException($e->getMessage(), $e->getCode(), $e);
-            }
-
-            return json_decode($res->getBody()->getContents(), 1);
+            return $this->tryCurl("CreateRecordTask",$payload);
         }
 
         /**

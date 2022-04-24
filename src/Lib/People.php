@@ -59,18 +59,9 @@
                 "PersonId"   => (string)$userId,
                 "Url"        => $imageUrl
             ];
-            $header  = $this->paramClass->header("CreatePerson", json_encode($payload));
 
-            try {
+            return $this->tryCurl("CreatePerson",$payload);
 
-                $res = $this->httpClient->post($this->host, ['headers' => $header, 'json' => $payload]);
-
-            } catch (\Exception $e) {
-
-                throw new HttpException($e->getMessage(), $e->getCode(), $e);
-            }
-
-            return json_decode($res->getBody()->getContents(), 1);
         }
 
         /**
@@ -93,16 +84,7 @@
                 "PersonId" => (string)$userId,
                 "GroupId"  => "security",
             ];
-            try {
-                $res = $this->httpClient->post($this->host, [
-                    'json'    => $payload,
-                    'headers' => $this->paramClass->header("DeletePersonFromGroup", json_encode($payload))
-                ]);
+            return $this->tryCurl("DeletePersonFromGroup",$payload);
 
-            } catch (\Exception $e) {
-                throw new HttpException($e->getMessage(), $e->getCode(), $e);
-            }
-
-            return json_decode($res->getBody()->getContents(), 1);
         }
     }

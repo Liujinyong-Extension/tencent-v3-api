@@ -49,15 +49,6 @@
                 "PersonId" => (string)$userId,
                 "Url"      => $imageUrl,
             ];
-            try {
-                $res = $this->httpClient->post($this->host, [
-                    'json'    => $payload,
-                    'headers' => $this->paramClass->header("VerifyFace", json_encode($payload))
-                ]);
-            } catch (Exception $e) {
-                throw new HttpException($e->getMessage(), $e->getCode(), $e);
-            }
-
-            return json_decode($res->getBody()->getContents(), 1);
+            return $this->tryCurl("VerifyFace",$payload);
         }
     }
