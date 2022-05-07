@@ -4,7 +4,7 @@
      * @package Liujinyong\TencentV3Api\Lib
      * User: Brahma
      * Date: 2022/4/9
-     * Time: 3:55 下午
+     * Time: 21:55 下午
      */
 
     namespace Liujinyong\TencentV3Api\Lib;
@@ -58,7 +58,7 @@
          * @param int    $endTime    结束时间
          *
          * @return mixed
-         *
+         * 创建直播录制任务
          * author Brahma
          * @throws \GuzzleHttp\Exception\GuzzleException
          * @throws \Liujinyong\TencentV3Api\Exception\HttpException
@@ -95,20 +95,9 @@
             }
             $payload = [
                 'TaskId' => $taskId,
-
             ];
-            $header  = $this->paramClass->header("StopRecordTask", json_encode($payload));
+            return $this->tryCurl("StopRecordTask",$payload);
 
-            try {
-
-                $res = $this->httpClient->post($this->host, ['headers' => $header, 'json' => $payload]);
-
-            } catch (\Exception $e) {
-
-                throw new HttpException($e->getMessage(), $e->getCode(), $e);
-            }
-
-            return json_decode($res->getBody()->getContents(), 1);
         }
 
         /**
@@ -130,18 +119,8 @@
                 'TaskId' => $taskId,
 
             ];
-            $header  = $this->paramClass->header("DeleteRecordTask", json_encode($payload));
+            return $this->tryCurl("DeleteRecordTask",$payload);
 
-            try {
-
-                $res = $this->httpClient->post($this->host, ['headers' => $header, 'json' => $payload]);
-
-            } catch (\Exception $e) {
-
-                throw new HttpException($e->getMessage(), $e->getCode(), $e);
-            }
-
-            return json_decode($res->getBody()->getContents(), 1);
         }
 
     }

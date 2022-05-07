@@ -4,7 +4,7 @@
      * @package Liujinyong\TencentV3Api\Lib\common
      * User: Brahma
      * Date: 2022/4/9
-     * Time: 4:07 下午
+     * Time: 22:07 下午
      */
 
     namespace Liujinyong\TencentV3Api\Lib\common;
