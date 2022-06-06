@@ -37,6 +37,7 @@
             $data  = [
                 "push_webrtc" => "webrtc://" . $this->pushUrl . "/" . $appName . "/" . $streamName . (isset($ext_str) ? $ext_str : ""),
                 "push_rtmp"   => "rtmp://" . $this->pushUrl . "/" . $appName . "/" . $streamName . (isset($ext_str) ? $ext_str : ""),
+                "pull_flv"   => $https."://" . $this->pullUrl . "/" . $appName . "/" . $streamName . ".flv",
                 "pull_m3u8"   => $https . "://" . $this->pullUrl . "/" . $appName . "/" . $streamName . ".m3u8",
                 "pull_webrtc" => "webrtc://" . $this->pullUrl . "/" . $appName . "/" . $streamName,
             ];

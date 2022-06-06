@@ -28,15 +28,18 @@
             ];
             parent::__construct($secretId, $secretKey, $option);
         }
-        public function TextToVoice($text = "",$SessionId = null)
+
+        public function TextToVoice($text = "", $SessionId = null)
         {
             $payload = [
-                "Text" => $text,
-                "SessionId"      => (string)$SessionId,
-                "Codec"      => 'mp3',
+                "Text"      => $text,
+                "SessionId" => (string)$SessionId,
+                "Codec"     => 'mp3',
+                "VoiceType" => 101024
             ];
+
             //var_dump($payload);die();
-            return $this->tryCurl("TextToVoice",$payload);
+            return $this->tryCurl("TextToVoice", $payload);
         }
 
     }
