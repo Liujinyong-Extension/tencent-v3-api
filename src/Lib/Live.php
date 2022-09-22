@@ -123,4 +123,26 @@
 
         }
 
+        /**
+         * @param $StreamName string 流名称
+         *  精准查询流信息
+         * @return mixed
+         * author Fox
+         * @throws \Liujinyong\TencentV3Api\Exception\HttpException
+         * @throws \Liujinyong\TencentV3Api\Exception\InvalidArgumentException
+         */
+        public function DescribeStreamPlayInfoList($StreamName = "")
+        {
+            if ($StreamName == "") {
+                throw new InvalidArgumentException("StreamName必须");
+            }
+            $payload = [
+                'StreamName' => $StreamName,
+                'StartTime' => date('Y-m-d H:i:00',time()),
+                'EndTime' => date('Y-m-d H:i:00',time()+60),
+
+            ];
+            return $this->tryCurl("DescribeStreamPlayInfoList",$payload);
+        }
+
     }

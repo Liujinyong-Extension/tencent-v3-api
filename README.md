@@ -44,6 +44,10 @@ $ composer require liujinyong/tencent-v3-api
     //创建直播录制任务
     $res = $live->createRecordTask("luzhi",$pushUrl,"live",1649732129);
     
+    
+    //根据流名称查询在线人数
+    $res = $live->DescribeStreamPlayInfoList("aaa");
+    
     //终止直播录制任务
     $taskId = "";
     $res = $live->stopRecordTask($taskId);
@@ -57,6 +61,8 @@ $ composer require liujinyong/tencent-v3-api
     //终止视频审核任务
     $taskIdforVideo = "";
     $res = $security->cancelTask($taskIdforVideo);
+    
+  
 
 ```
 
