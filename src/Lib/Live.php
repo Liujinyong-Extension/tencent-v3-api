@@ -124,6 +124,29 @@
         }
 
         /**
+         * @param $startTime
+         * @param $endTime
+         * 查询创建的流任务
+         * @return mixed
+         * author Fox
+         * @throws \Liujinyong\TencentV3Api\Exception\HttpException
+         * @throws \Liujinyong\TencentV3Api\Exception\InvalidArgumentException
+         */
+        public function DescribeRecordTask($startTime,$endTime)
+        {
+            if ($startTime == "" || $endTime == "" ) {
+                throw new InvalidArgumentException("开始时间错误");
+            }
+            $payload = [
+                'StartTime' => $startTime,
+                'EndTime' => $endTime,
+
+            ];
+            return $this->tryCurl("DescribeRecordTask",$payload);
+
+        }
+
+        /**
          * @param $StreamName string 流名称
          *  精准查询流信息
          * @return mixed
@@ -138,8 +161,8 @@
             }
             $payload = [
                 'StreamName' => $StreamName,
-                'StartTime' => date('Y-m-d H:i:00',time()),
-                'EndTime' => date('Y-m-d H:i:00',time()+60),
+                'StartTime' => date('Y-m-d H:i:s',time()-60),
+                'EndTime' => date('Y-m-d H:i:s',time()),
 
             ];
             return $this->tryCurl("DescribeStreamPlayInfoList",$payload);
