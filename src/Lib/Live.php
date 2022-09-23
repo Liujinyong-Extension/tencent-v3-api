@@ -126,7 +126,7 @@
         /**
          * @param $startTime
          * @param $endTime
-         * 查询创建的流任务
+         * 查询创建的流直播录制任务
          * @return mixed
          * author Fox
          * @throws \Liujinyong\TencentV3Api\Exception\HttpException
