@@ -62,6 +62,10 @@ $ composer require liujinyong/tencent-v3-api
     $taskIdforVideo = "";
     $res = $security->cancelTask($taskIdforVideo);
     
+    //名片识别接口
+    $ocr = new \Liujinyong\TencentV3Api\Lib\Ocr($secretId,$secretKey);
+    $res = $ocr->BusinessCardOCR($imageUrl);
+    
   
 
 ```
