@@ -66,6 +66,15 @@ $ composer require liujinyong/tencent-v3-api
     $ocr = new \Liujinyong\TencentV3Api\Lib\Ocr($secretId,$secretKey);
     $res = $ocr->BusinessCardOCR($imageUrl);
     
+    //文本内容安全接口
+    $client = new \Liujinyong\TencentV3Api\Lib\ContentSecurity($secretId,$secretKey);
+    $res = $client->check("社会主义价值观");
+    
+    
+    //图片内容安全接口
+    $client = new \Liujinyong\TencentV3Api\Lib\ImageSecurity($secretId,$secretKey);
+    $res = $client->checkSync("ImageUrl","Target_id");
+    
   
 
 ```

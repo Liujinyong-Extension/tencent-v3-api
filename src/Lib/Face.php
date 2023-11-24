@@ -10,7 +10,6 @@
     namespace Liujinyong\TencentV3Api\Lib;
 
 
-    use Liujinyong\TencentV3Api\Exception\HttpException;
     use Liujinyong\TencentV3Api\Exception\InvalidSettingParam;
     use think\Exception;
 
